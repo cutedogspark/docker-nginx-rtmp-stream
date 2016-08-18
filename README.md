@@ -8,6 +8,10 @@
 
 ### Run
 
+#### Start Container
+```
+docker run --rm --name nginx-rtmp -p 1935:1935 -p 80:80 garychen/qnap-nginx-rtmp
+```
 
 #### transcoding with FFmpeg
 ----------
@@ -16,3 +20,12 @@
 
 #### LINUX
     ffmpeg -re -framerate 30000/1001 -loop 1 -i blue.png -vf drawtext="fontfile=/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf:timecode='$(date +%H'\:'%M'\:'%S'\:'%02N)':rate=29.97:text='TCR\:':fontsize=72:fontcolor='white':boxcolor=0x000000AA:box=1:x=10:y=10" -c:v libx264 -vcodec libx264 -pix_fmt yuv420p -preset veryfast -f flv rtmp://localhost:1935/rtmp/live
+
+## Ports
+-----
+
+The container exposes ports 
+**80** (HTTP)
+**443** (HTTPs)
+**1935** (RTMP)
+

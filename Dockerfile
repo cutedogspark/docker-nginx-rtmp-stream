@@ -36,12 +36,12 @@ RUN mkdir /src && mkdir /config && mkdir /logs && mkdir /data && mkdir /static &
 RUN cd /src && wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && tar zxf nginx-$NGINX_VERSION.tar.gz && rm nginx-$NGINX_VERSION.tar.gz
 
 # Get Nginx-RTMP module
-RUN cd /src && wget https://github.com/arut/nginx-rtmp-module/archive/v$NGINX_RTMP_MODULE_VERSION.tar.gz && tar zxf v$NGINX_RTMP_MODULE_VERSION.tar.gz && rm v$NGINX_RTMP_MODULE_VERSION.tar.gz
+RUN cd /src && wget https://github.com/arut/nginx-rtmp-module/archive/v$NGINX_RTMP_MODULE_VERSION.tar.gz && tar zxf v$NGINX_RTMP_MODULE_VERSION.tar.gz && rm v$NGINX_RTMP_MODULE_VERSION.tar.gz && mv nginx-rtmp-module-$NGINX_RTMP_MODULE_VERSION nginx-rtmp-module
 
 # Compile Nginx  ( --with-debug )
 RUN cd /src/nginx-$NGINX_VERSION \
     && ./configure \
-        --add-module=/src/nginx-rtmp-module-$NGINX_RTMP_MODULE_VERSION \
+        --add-module=/src/nginx-rtmp-module \
         --conf-path=/config/nginx.conf \
         --error-log-path=/logs/nginx_error.log \
         --http-log-path=/logs/nginx_access.log \
